@@ -2,11 +2,17 @@ import pandas as pd
 
 data=pd.read_csv("netflix_titles.csv")
 
-print(data.head(5), data.shape)
+print(data.shape)
 
-data_ind = data.set_index("country")
+missing_val=data.isnull().sum()
 
-print(data_ind)
+print(missing_val)
+
+new_data = data.dropna(subset=["rating","date_added"])
+
+print(new_data.shape)
+
+
 
 
 
