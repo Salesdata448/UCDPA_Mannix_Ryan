@@ -12,6 +12,9 @@ new_data = data.dropna(subset=["rating","date_added"])
 
 print(new_data.shape)
 
+new_data = data.drop_duplicates(subset=["director", "rating","duration","date_added"])
+
+print(new_data.shape)
 
 
 
