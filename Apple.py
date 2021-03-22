@@ -15,8 +15,11 @@ print(missing_val)
 droprows=app_data.dropna()
 print(app_data.shape,droprows.shape)
 
+#no rows have missing data
 
-
+#dataset seems to be clean no duplicates to drop.
+drop_duplicates= app_data.drop_duplicates()
+print(app_data.shape,drop_duplicates.shape)
 
 
 
