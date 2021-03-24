@@ -2,9 +2,10 @@ import matplotlib.pyplot as plt
 import pandas as pd  # data processing, CSV file I/O (e.g. pd.read_csv)
 import seaborn as sns
 
-# Importing both Applestore.csv and Applestore_desc csv.Naming Applestore.csv df and Applestore_desc
-# df_desc. From df, dropping unwanted columns. Rubric asks to drop duplicates but dropping columns as you can see from
-# line 18 there are no missing values or duplicates to drop. Printing head of df to understand data
+# From Kaggle Importing both Applestore.csv and Applestore_desc csv.Naming Applestore.csv "df" and Applestore_desc
+# "df_desc". From df, dropping unwanted columns. Rubric asks to drop duplicates but instead I am
+# dropping columns as you can see from line 18 there are no missing values or duplicates to drop.
+# Printing head of df to understand data
 
 data = pd.read_csv('AppleStore.csv')
 df=data
@@ -29,7 +30,7 @@ print(missing_values_count_df_desc[0:5])
 
 print(df.dtypes)
 
-#getting mean user ratings by indexing by prime genre and getting the mean of user ratings per genre.
+#getting mean user ratings by indexing by "prime_genre" and getting the mean of user ratings per genre.
 mean_user_ratings=df.groupby('prime_genre')['user_rating'].mean().reset_index().sort_values(by=['user_rating'])
 
 plt.figure(figsize = (10, 8), facecolor = None)
