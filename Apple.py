@@ -90,12 +90,38 @@ for lab, row in df.iterrows() :
     print(row)
 
 
+#Merging applestore & applestore_desc on "id" as the number uniquely identifies the apps across both
+#dataframes. Gives 7197 rows x 19 columns
 
+df_merge = df.merge(df_desc, on='id')
 
+print(df_merge)
 
+import numpy as np
 
+#creating list of prices
 
+list_of_price = df['price'].to_list()
+print('price: ', list_of_price)
+print('Type of price: ', type(list_of_price))
 
+np_list_of_price = np.array(list_of_price)
+print(type(np_list_of_price))
+
+df_index["price"].hist()
+plt.show()
+
+print(df_index.head())
+
+#creating bar plot form df_index showing user rating by prime genre
+
+df_rated_by_genre_user_rating = df_index.groupby("prime_genre")["user_rating"].sum()
+df_rated_by_genre_user_rating.plot(kind="bar")
+plt.show()
+
+#creating scatter plot from df
+df_price_user_rating = df.plot(x="price", y="user_rating", kind="scatter", title="Price v Rating")
+plt.show()
 
 
 
