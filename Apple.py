@@ -1,9 +1,6 @@
-import numpy as np # linear algebra
-import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
-import seaborn as sns
-
-
 import matplotlib.pyplot as plt
+import pandas as pd  # data processing, CSV file I/O (e.g. pd.read_csv)
+import seaborn as sns
 
 # Importing both Applestore.csv and Applestore_desc csv.Naming Applestore.csv df and Applestore_desc
 # df_desc. From df, dropping unwanted columns. Rubric asks to drop duplicates but dropping columns as you can see from
@@ -44,3 +41,51 @@ plot.set(xlabel='App prime genre',ylabel='Average user ratings')
 plot.set_title('App Genre vs Average User rating')
 
 plt.show()
+
+# I want to work out which is the most popular genre of app in terms of amount of apps in the
+# app store
+
+app_count=df["prime_genre"].value_counts().reset_index()
+
+plt.figure(figsize = (10, 8), facecolor = None)
+sns.set_style("darkgrid")
+plot1 = sns.barplot(x="index", y="prime_genre", data=app_count)
+
+plot1.set_xticklabels(app_count['index'], rotation=90, ha="center")
+plot1.set(xlabel='App prime genre',ylabel='App count in App store')
+plot1.set_title('App Genre vs App Count')
+
+plt.show()
+
+#pivot table to show mean price and median price per genre.
+
+import numpy as np
+
+mean_price_by_genre = df.pivot_table(values="price", index="prime_genre", aggfunc=[np.mean, np.median])
+print(mean_price_by_genre)
+
+print(df)
+
+#As per rubric indexing df by prime_genre, then subsetting with .loc on the expensive genres of apps which are
+# business and medical.
+
+df_index = df.set_index("prime_genre")
+print(df_index)
+
+Expensive = ["Business", "Medical"]
+print(df_index.loc[Expensive])
+
+#slicing by index values by first sorting df_index then slicing using.loc by prime_genre.
+df_index_srt = df_index.sort_index()
+
+
+print(df_index_srt.loc["Book": "Education"])
+
+
+
+
+
+
+
+
+
