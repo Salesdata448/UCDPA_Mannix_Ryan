@@ -81,6 +81,16 @@ df_index_srt = df_index.sort_index()
 
 print(df_index_srt.loc["Book": "Education"])
 
+#Loop over dataframe using iterrows()
+
+df = pd.read_csv('AppleStore.csv', index_col=0)
+
+for lab, row in df.iterrows() :
+    print(lab)
+    print(row)
+
+
+
 
 
 
