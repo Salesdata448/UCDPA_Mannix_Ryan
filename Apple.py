@@ -123,5 +123,43 @@ plt.show()
 df_price_user_rating = df.plot(x="price", y="user_rating", kind="scatter", title="Price v Rating")
 plt.show()
 
+#charting price and genres
+df_chart = pd.read_csv("AppleStore.csv", index_col=6)
+fig, ax = plt.subplots()
+ax.scatter(df_chart.index, df_chart["prime_genre"])
+ax.set_xlabel("Price")
+ax.set_ylabel("App Genres")
+plt.show()
+
+#scatter plot
+
+fig, ax = plt.subplots()
+ax.scatter(df["user_rating"], df["price"])
+ax.set_xlabel("User Rating")
+ax.set_ylabel("Cost of App")
+plt.show()
+
+#App genre vs Total ratings
+tot_ratings=df.groupby('prime_genre')['rating_count_tot'].sum().reset_index().sort_values(by=['rating_count_tot'])
+tot_ratings
+plt.figure(figsize = (10, 8), facecolor = None)
+sns.set_style("darkgrid")
+plot1 = sns.barplot(x="prime_genre", y="rating_count_tot", data=tot_ratings)
+plot1.set_xticklabels(tot_ratings['prime_genre'], rotation=90, ha="center")
+plot1.set(xlabel='App prime genre',ylabel='Total ratings')
+plot1.set_title('App Genre vs Total ratings')
+plt.show()
 
 
+#App genre vs Content rating
+df['cont_rating'] = df.apply(lambda row: row['cont_rating'][:-1], axis=1)
+df['cont_rating'] = pd.to_numeric(df['cont_rating'])
+avg_cont_ratings=df.groupby('prime_genre')['cont_rating'].mean().reset_index().sort_values(by=['cont_rating'])
+avg_cont_ratings
+plt.figure(figsize = (10, 8), facecolor = None)
+sns.set_style("darkgrid")
+plot1 = sns.barplot(x="prime_genre", y="cont_rating", data=avg_cont_ratings)
+plot1.set_xticklabels(avg_cont_ratings['prime_genre'], rotation=90, ha="center")
+plot1.set(xlabel='App prime genre',ylabel='Content Rating')
+plot1.set_title('App Genre vs Content rating')
+plt.show()
